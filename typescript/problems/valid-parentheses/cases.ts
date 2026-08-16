@@ -65,4 +65,31 @@ export const cases: TestCase<Parameters<typeof solve>, ReturnType<typeof solve>>
   { name: "nested nested nested valid nine deep", input: ["((({{{[[[]]]}}})))"], expected: true },
   { name: "nested nested nested invalid mismatch deep", input: ["((({{{[[[}]]}}])))"], expected: false },
   { name: "nested with trailing valid pair", input: ["[{}]()"], expected: true },
+  // Non-bracket characters ('(){}[]' plus anything else) are treated as
+  // no-ops: they're skipped entirely, and validity depends only on how the
+  // bracket characters nest and match.
+  { name: "letters around valid brackets", input: ["a(b)c"], expected: true },
+  { name: "letters around invalid brackets", input: ["a(bc"], expected: false },
+  { name: "digits around valid brackets", input: ["3 + (4 * 5)"], expected: true },
+  { name: "digits around invalid brackets", input: ["3 + (4 * 5]"], expected: false },
+  { name: "only non-bracket characters", input: ["hello world"], expected: true },
+  { name: "whitespace and newlines only", input: ["  \n\t  "], expected: true },
+  {
+    name: "punctuation around valid nested brackets",
+    input: ["note: [item1, item2, {key: value}]!"],
+    expected: true,
+  },
+  {
+    name: "punctuation around mismatched brackets",
+    input: ["note: [item1, item2, {key: value)!"],
+    expected: false,
+  },
+  { name: "word characters wrapping mismatched types", input: ["foo(bar[baz)qux]"], expected: false },
+  { name: "word characters wrapping correct nesting", input: ["foo(bar[baz]qux)"], expected: true },
+  { name: "lone unmatched opener among letters", input: ["start(middle end"], expected: false },
+  { name: "lone unmatched closer among letters", input: ["start) middle end"], expected: false },
+  { name: "unicode and emoji around valid brackets", input: ["✨(😀[🎉]👍)✨"], expected: true },
+  { name: "unicode and emoji around invalid brackets", input: ["✨(😀[🎉]👍"], expected: false },
+  { name: "mathematical expression valid", input: ["(3 + [4 * (5 - 2)]) / {1}"], expected: true },
+  { name: "mathematical expression invalid", input: ["(3 + [4 * (5 - 2)) / {1}]"], expected: false },
 ];
