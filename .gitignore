@@ -4,5 +4,8 @@ coverage/
 *.log
 .DS_Store
 
-solution.ts
-!**/_template/solution.ts
+
+typescript/problems/**/*.ts
+!typescript/problems/**/cases.ts
+!typescript/problems/**/solution.test.ts
+!**/_template/**/*.*
