@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "deny": [
+      "Edit(typescript/problems/*/solution.ts)",
+      "Write(typescript/problems/*/solution.ts)"
+    ]
+  }
+}

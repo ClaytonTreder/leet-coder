@@ -1,0 +1,3 @@
+# Keep AI agents off solution.ts — see AGENTS.md.
+# Cursor: blocks both indexing and @-mention reads/edits of matching paths.
+**/problems/*/solution.ts

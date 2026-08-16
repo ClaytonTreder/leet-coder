@@ -1,0 +1,6 @@
+# Keep AI agents off solution.ts — see AGENTS.md.
+# Cline: filters auto-loaded context only, not an access-control boundary —
+# matching files can still be opened via an explicit @ mention or a shell
+# command. Cline has also flagged this mechanism for deprecation upstream,
+# so treat it as best-effort.
+**/problems/*/solution.ts

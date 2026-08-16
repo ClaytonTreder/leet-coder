@@ -1,0 +1,5 @@
+# Keep AI agents off solution.ts — see AGENTS.md.
+# Aider: excludes matching paths from the repo map / auto-context. Aider
+# will still open a file added explicitly with /add, so this is a soft
+# default rather than a hard block.
+**/problems/*/solution.ts

@@ -41,27 +41,64 @@ for.
 
 ## Keeping agents off `solution.ts` at the tool level
 
-The rule above is a convention — honored by whatever agent reads this file,
-but not technically enforced. If you want a hard guarantee instead of a
-request, Claude Code supports blocking a specific tool+path combination via
-`permissions.deny` in `.claude/settings.json`:
+The rule above is a convention, and two things reinforce it:
 
-```jsonc
-{
-  "permissions": {
-    "deny": [
-      "Edit(typescript/problems/*/solution.ts)",
-      "Write(typescript/problems/*/solution.ts)"
-    ]
-  }
-}
-```
+1. **A comment in the file itself.** `problems/_template/solution.ts` (and
+   every `solution.ts` scaffolded from it) starts with an `// AGENTS: do not
+   implement ...` line above the doc comment. `scripts/new-problem.mjs`
+   copies the template verbatim, so this propagates to every new problem
+   automatically. This is a request, not an enforcement — it only works on
+   agents that read files before editing them.
+2. **A hard block for Claude Code**, via `permissions.deny` in
+   [.claude/settings.json](.claude/settings.json):
 
-This is **not enabled by default** in this repo — it would also block an
-agent from helping you with a solution.ts on request, e.g. debugging a
-failing case. Add it yourself (or ask your agent to) if you want that
-tradeoff. Other tools have comparable mechanisms under different names
-(Cursor: `.cursorignore`; Aider: `.aiderignore` / read-only mode) — those
-tend to exclude a path from context entirely rather than just blocking
-writes, so check the tool's docs before relying on one for this exact
-behavior.
+   ```jsonc
+   {
+     "permissions": {
+       "deny": [
+         "Edit(typescript/problems/*/solution.ts)",
+         "Write(typescript/problems/*/solution.ts)"
+       ]
+     }
+   }
+   ```
+
+   This **is enabled in this repo**. It blocks Claude Code from editing or
+   writing any `problems/*/solution.ts` outright, including on explicit
+   request (e.g. "fix my failing case") — the exception in this file's
+   opening section no longer applies for Claude Code specifically once this
+   is in place. If you want an agent's help debugging a solution despite the
+   block, remove or loosen the deny rule for that session, or paste the
+   relevant code into the conversation directly instead of asking the agent
+   to open/edit the file.
+
+3. **Ignore files for other tools**, each with the same
+   `typescript/problems/*/solution.ts` pattern (`.gitignore` syntax) at the
+   repo root. Strength varies by tool — an ignore file usually keeps a path
+   out of automatic context/indexing, not a hard write-block like Claude
+   Code's `permissions.deny`:
+   - [.cursorignore](.cursorignore) — Cursor. Blocks both indexing and
+     `@`-mention reads/edits; the strongest of this group.
+   - [.codeiumignore](.codeiumignore) — Windsurf / Cascade. Blocks viewing,
+     editing, and creation of matching paths.
+   - [.aiderignore](.aiderignore) — Aider. Excludes from the repo map /
+     auto-context, but `/add`-ing the file explicitly still works.
+   - [.clineignore](.clineignore) — Cline. Filters auto-loaded context only
+     (explicit `@` mentions or shell commands can still reach the file), and
+     Cline has flagged this mechanism for upstream deprecation, so treat it
+     as best-effort.
+
+   Two tools named at the top of this file have **no file-based option**, so
+   only the comment convention (point 1) applies to them:
+   - **Codex CLI** has no ignore-file mechanism as of this writing (it's an
+     open feature request upstream) — it relies on reading the `// AGENTS:`
+     comment and this file.
+   - **GitHub Copilot**'s equivalent, Content Exclusion, is Business/
+     Enterprise-only and configured in GitHub's web UI (repo or org Settings
+     → Copilot → Content exclusion), not a file you can commit — so there's
+     nothing to add here for it.
+
+When adding a new language folder or renaming `problems/`, update the
+pattern in all of these places together: `.gitignore`,
+`.claude/settings.json`, `.cursorignore`, `.codeiumignore`, `.aiderignore`,
+and `.clineignore`.
