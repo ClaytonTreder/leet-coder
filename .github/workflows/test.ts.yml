@@ -16,18 +16,22 @@ jobs:
         with:
           node-version: '24' # Or your specific version
           cache: 'npm'
+          cache-dependency-path: typescript/package-lock.json
 
       - name: Install Dependencies
+        working-directory: typescript
         run: npm ci
 
       # continue-on-error ensures the badge updates even if tests fail
       - name: Run Test Suite
+        working-directory: typescript
         run: npm test
-        continue-on-error: true 
+        continue-on-error: true
 
       # Pass your repository secrets into the script environment
       - name: Parse and Update Gist
-        run: node generate-badge.js
+        working-directory: typescript
+        run: node ../generate-badge.js
         env:
-          GIST_ID: gist:af4877d519a5dd3b94cbee51330ed088
+          GIST_ID: af4877d519a5dd3b94cbee51330ed088
           GIST_TOKEN: ${{ secrets.CLAYTON_TREDER_GIST }}

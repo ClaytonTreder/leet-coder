@@ -29,7 +29,7 @@ async function updateBadge() {
     };
 
     // 6. Direct HTTP patch to update your personal Gist file
-    const response = await fetch(`https://github.com{process.env.GIST_ID}`, {
+    const response = await fetch(`https://api.github.com/gists/${process.env.GIST_ID}`, {
       method: 'PATCH',
       headers: {
         'Authorization': `token ${process.env.GIST_TOKEN}`,
