@@ -1,6 +1,8 @@
-
 ![Git Hub Actions (TS)](https://github.com/ClaytonTreder/leet-coder/actions/workflows/test.ts.yml/badge.svg)
+
+## Language Tests
 ![TS Passing Problems](https://img.shields.io/endpoint?url=https%3A%2F%2Fgist.githubusercontent.com%2FClaytonTreder%2Faf4877d519a5dd3b94cbee51330ed088%2Fraw%2Fleet-coder-ts-badge.json)
+
 
 # leet-coder
 
