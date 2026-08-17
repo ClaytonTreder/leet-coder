@@ -40,10 +40,6 @@ the repo elsewhere gets you the problems and tests but not the solved code.
 That's intentional: this repo exists to practice solving problems, not to
 publish spoilers of the answers.
 
-If you ever want to commit a specific solution anyway (e.g. to share one),
-it has to be explicit: `git add -f problems/<problem>/solution.ts`. These
-branches will not be checked into the main branch.
-
 ### Using an agent to add problems
 
 The best split of labor: let an agent scaffold the problem (run `npm run

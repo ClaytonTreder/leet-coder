@@ -9,25 +9,27 @@ here with [typescript/](typescript/), and add sibling folders (e.g.
 language.
 
 Solutions are never checked into this repo — only the problem scaffolding
-and its test cases are. See [Solutions aren't
-committed](typescript/README.md#solutions-arent-committed) in the
-TypeScript README for the mechanics and how it applies to agent-assisted
-workflows.
+and its test cases are.
+
+If you ever want to commit a specific solution anyway (e.g. to share one),
+make a new branch and it must be specifically added:
+ `git add -f problems/<problem>/solution.*`. These branches will not be 
+ checked into the main branch.
 
 ## Layout
 
 ```
 leet-coder/
-  typescript/          # a language folder — self-contained, own package manager/config
+  <language>/                 # a language folder — self-contained, own package manager/config
     problems/
-      _template/        # copy this to start a new problem
-      two-sum/           # example problem
-        README.md          # problem write-up — title, link, examples, constraints (renders on GitHub)
-        solution.ts       # your implementation — gitignored
-        cases.ts           # test case data — populate this per problem
-        solution.test.ts    # wires cases.ts into the test runner (rarely edited)
-    src/testHarness.ts    # shared helper that turns `cases` into test cases
-    scripts/new-problem.mjs # scaffolds a new problems/<slug> folder
+      _template/              # copy this to start a new problem
+      <problem>/              # example problem
+        README.md             # problem write-up — title, link, examples, constraints (renders on GitHub)
+        solution              # your implementation — gitignored
+        cases                 # test case data — populate this per problem
+        solution.test.ts      # wires cases.ts into the test runner (rarely edited)
+    src/testHarness.ts        # shared helper that turns `cases` into test cases
+    scripts/new-problem.mjs   # scaffolds a new problems/<problem> folder
 ```
 
 ## Adding a new language folder later
@@ -37,7 +39,7 @@ language folder should be runnable on its own with that language's normal
 tooling (e.g. `python/` with `pytest`, `go/` with `go test`). Mirror the
 shape used in `typescript/`:
 
-- `problems/<slug>/` per problem, containing a solution file and its test
+- `problems/<problem>/` per problem, containing a solution file and its test
   cases
 - a `_template` problem folder to copy from
 - whatever native test runner fits the language
@@ -52,5 +54,3 @@ cd typescript
 npm install
 npm test
 ```
-
-See [typescript/README.md](typescript/README.md) for how to add problems.
