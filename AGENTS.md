@@ -16,28 +16,41 @@ this sequence and stop before implementing anything:
    npm run new -- <slug>
    ```
    (kebab-case, e.g. `valid-parentheses`). This copies `problems/_template/`
-   to `problems/<slug>/`.
-2. In `problems/<slug>/solution.ts`, fill in only the doc comment: the
-   problem title, the `https://leetcode.com/problems/<slug>/` link, and a
-   short paraphrase of the description/constraints. You may update `solve`'s
-   signature/types to match the problem if they're unambiguous from the
-   prompt (e.g. `solve(nums: number[], target: number): number[]`), but
-   leave the body as the template's `throw new Error("Not implemented")`
-   stub. **Never fill in the algorithm.**
-3. In `problems/<slug>/cases.ts`, populate real test cases — the examples
+   to `problems/<slug>/`, including a `PROBLEM.md` template.
+2. In `problems/<slug>/PROBLEM.md`, write up the problem in full: the title,
+   the `https://leetcode.com/problems/<slug>/` link, the description, the
+   examples from the problem statement (input/output pairs), and
+   constraints if the problem lists any worth noting. Also fill in the
+   "Suggested `solve` signature" section (e.g.
+   `function solve(nums: number[], target: number): number[]`). This file
+   is fine to fill in completely — describing the problem isn't solving it.
+   It's what the human copies from when they set up `solution.ts`
+   themselves.
+3. **Never touch `problems/<slug>/solution.ts`** as part of scaffolding —
+   not the doc comment, not the signature, not even placeholders. Leave it
+   exactly as the template copied it, for every tool, every time.
+   `PROBLEM.md` is the one place scaffolding writes to now, which sidesteps
+   needing to touch `solution.ts` at all (see "Keeping agents off
+   `solution.ts` at the tool level" below for why some tools additionally
+   hard-block edits there regardless).
+4. In `problems/<slug>/cases.ts`, populate real test cases — the examples
    from the problem statement plus a couple of edge cases. This is fine to
    fill in fully: cases describe what the answer should be, not how to
    compute it.
-4. In `problems/<slug>/solution.test.ts`, replace `<title>` in the
+5. In `problems/<slug>/solution.test.ts`, replace `<title>` in the
    `runTestCases(...)` call with the problem's title.
-5. Run `npm run typecheck` to confirm the stub compiles. Don't run
-   `npm test` expecting it to pass — the stub throws by design, and that's
-   correct.
+6. Run `npm run typecheck` to confirm the stub compiles — expect it to fail
+   here if `cases.ts` uses the problem's real argument/return types, since
+   `solve` in `solution.ts` still has the template's `(): unknown`
+   signature until the user copies the real one over from `PROBLEM.md`.
+   That's expected scaffolding state, not a bug — say so rather than trying
+   to work around it. Don't run `npm test` expecting it to pass either — the
+   stub throws by design.
 
 **Exception:** if the user explicitly asks you to *solve* or *implement* a
-specific problem (not just add/scaffold it), do that. The restriction above
-is about not defaulting to a full solution when only scaffolding was asked
-for.
+specific problem (not just add/scaffold it), do that — including filling in
+`solution.ts` for real. The restriction above is about not defaulting to a
+full solution (or even its signature) when only scaffolding was asked for.
 
 ## Keeping agents off `solution.ts` at the tool level
 

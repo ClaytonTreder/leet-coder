@@ -41,17 +41,20 @@ That's intentional: this repo exists to practice solving problems, not to
 publish spoilers of the answers.
 
 If you ever want to commit a specific solution anyway (e.g. to share one),
-it has to be explicit: `git add -f problems/<slug>/solution.ts`.
+it has to be explicit: `git add -f problems/<slug>/solution.ts`. These
+branches will not be checked into the main branch.
 
 ### Using an agent to add problems
 
 The best split of labor: let an agent scaffold the problem (run `npm run
-new`, fill in the doc comment in `solution.ts`, and populate `cases.ts` with
-real test cases) but leave `solution.ts`'s `solve` body unimplemented. See
-[AGENTS.md](../AGENTS.md) for the exact instructions agents follow — since
-solutions aren't meant to be committed anyway, having an agent write one
-would just hand you the answer and skip the point of practicing. Solve it
-yourself once the scaffolding is in place, then run `npm test -- <slug>`.
+new`, write up the problem in `PROBLEM.md`, and populate `cases.ts` with
+real test cases) but leave `solution.ts` completely untouched — not even the
+doc comment or signature. See [AGENTS.md](../AGENTS.md) for the exact
+instructions agents follow — since solutions aren't meant to be committed
+anyway, having an agent write one would just hand you the answer and skip
+the point of practicing. Once the scaffolding is in place, copy the title,
+link, and suggested `solve` signature from `PROBLEM.md` into `solution.ts`
+yourself, solve it, then run `npm test -- <slug>`.
 
 ## Running tests
 
@@ -68,6 +71,7 @@ npm run typecheck           # tsc --noEmit, no test execution
 problems/
   _template/          # copy source for `npm run new`
   two-sum/             # worked example
+    PROBLEM.md            # problem write-up — title, link, examples, constraints
     solution.ts          # your implementation (export `solve`) — gitignored
     cases.ts               # test case data — edit this most often
     solution.test.ts         # generic runner, rarely touched

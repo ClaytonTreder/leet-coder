@@ -22,6 +22,7 @@ leet-coder/
     problems/
       _template/        # copy this to start a new problem
       two-sum/           # example problem
+        PROBLEM.md         # problem write-up — title, link, examples, constraints
         solution.ts       # your implementation — gitignored
         cases.ts           # test case data — populate this per problem
         solution.test.ts    # wires cases.ts into the test runner (rarely edited)
