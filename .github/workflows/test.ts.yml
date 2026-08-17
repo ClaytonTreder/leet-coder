@@ -16,3 +16,9 @@ jobs:
       - name: Run tests in subfolder
         run: npm test
         working-directory: ./typescript # Changes to the frontend folder
+
+      - name: Generate Test Badge Data
+        uses: github/marketplace/actions/ci-badges@v1 # Adapt to an active marketplace badge action
+        with:
+          auth: ${{ secrets.CLAYTON_TREDER_GIST }} # Create a personal access token with 'gist' scope
+          gistID: gist:af4877d519a5dd3b94cbee51330ed088  
