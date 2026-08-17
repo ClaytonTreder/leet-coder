@@ -38,7 +38,7 @@ async function updateBadge() {
       },
       body: JSON.stringify({
         files: {
-          'vitest-badge.json': {
+          'leet-coder-badge.json': {
             content: JSON.stringify(badgePayload, null, 2)
           }
         }
