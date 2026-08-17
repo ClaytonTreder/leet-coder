@@ -1,5 +1,5 @@
-https://github.com/ClaytonTreder/leet-coder/actions/workflows/test.ts.yml/badge.svg
 
+![TypsScript Tests](https://github.com/ClaytonTreder/leet-coder/actions/workflows/test.ts.yml/badge.svg)
 
 # leet-coder
 
