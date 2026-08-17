@@ -17,8 +17,15 @@ async function updateBadge() {
     if (failed > 0) message += `, ${failed} failed`;
     if (skipped > 0) message += `, ${skipped} skipped`;
 
-    // 4. Set color indicator based on failures or skips
-    const color = failed > 0 ? 'red' : skipped > 0 ? 'yellow' : 'brightgreen';
+    // 4. Set color indicator based on percent of success
+    const percent = total > 0 ? (passed / total) * 100 : 0;
+    const color =
+      percent === 100 ? 'brightgreen' :
+      percent >= 80 ? 'green' :
+      percent >= 60 ? 'yellowgreen' :
+      percent >= 40 ? 'yellow' :
+      percent >= 20 ? 'orange' :
+      'red';
 
     // 5. Structure the standard Shields.io schema
     const badgePayload = {

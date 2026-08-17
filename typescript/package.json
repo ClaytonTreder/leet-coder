@@ -4,7 +4,8 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "test": "vitest run --reporter=json --outputFile=vitest-results.json",
+    "test": "vitest run",
+    "test-gh": "vitest run --reporter=json --outputFile=vitest-results.json",
     "test:watch": "vitest",
     "typecheck": "tsc --noEmit",
     "new": "node scripts/new-problem.mjs"
