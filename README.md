@@ -1,3 +1,6 @@
+https://github.com/ClaytonTreder/leet-coder/actions/workflows/test.ts.yml/badge.svg
+
+
 # leet-coder
 
 A local, no-UI environment for practicing coding problems with real automated
