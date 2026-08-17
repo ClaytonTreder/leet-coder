@@ -47,6 +47,13 @@ shape used in `typescript/`:
   its `_template` copy or its test cases) — see [Solutions aren't
   committed](typescript/README.md#solutions-arent-committed)
 
+## Solution branches
+
+`solutions/*` branches should be branched off `solutions/main`. The main
+solution branch does not have the gitignore solutions check attached. If
+new problems/languages are added to `solutions/main` will pull in `main`
+and any other solution folder can have that pulled into it as well.
+
 ## Quick start
 
 ```bash
