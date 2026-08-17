@@ -23,7 +23,7 @@ async function updateBadge() {
     // 5. Structure the standard Shields.io schema
     const badgePayload = {
       schemaVersion: 1,
-      label: 'tests',
+      label: 'TypeScript Tests',
       message: message,
       color: color
     };
@@ -38,7 +38,7 @@ async function updateBadge() {
       },
       body: JSON.stringify({
         files: {
-          'leet-coder-badge.json': {
+          'leet-coder-ts-badge.json': {
             content: JSON.stringify(badgePayload, null, 2)
           }
         }

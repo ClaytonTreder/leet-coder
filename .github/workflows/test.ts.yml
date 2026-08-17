@@ -31,7 +31,7 @@ jobs:
       # Pass your repository secrets into the script environment
       - name: Parse and Update Gist
         working-directory: typescript
-        run: node ../generate-badge.js
+        run: node generate-badge.js
         env:
           GIST_ID: af4877d519a5dd3b94cbee51330ed088
           GIST_TOKEN: ${{ secrets.CLAYTON_TREDER_GIST }}
