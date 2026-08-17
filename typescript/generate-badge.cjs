@@ -7,13 +7,11 @@ async function updateBadge() {
     const results = JSON.parse(rawData);
 
 
-//numTotalTestSuites":28,"numPassedTestSuites":8,"numFailedTestSuites":20,
-
     // 2. Extract Vitest metrics
 
-    const problemsTotal = numTotalTestSuites / 2;
-    const problemsPassed = numPassedTestSuites / 2;
-    const problemsFailed = numFailedTestSuites / 2;
+    const problemsTotal = results.numTotalTestSuites / 2;
+    const problemsPassed = results.numPassedTestSuites / 2;
+    const problemsFailed = results.numFailedTestSuites / 2;
 
     // 3. Format your badge string structure
     let message = `${problemsPassed}/${problemsTotal} passed`;
