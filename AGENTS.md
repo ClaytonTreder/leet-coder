@@ -16,9 +16,11 @@ this sequence and stop before implementing anything:
    npm run new -- <slug>
    ```
    (kebab-case, e.g. `valid-parentheses`). This copies `problems/_template/`
-   to `problems/<slug>/`, including a `PROBLEM.md` template.
-2. In `problems/<slug>/PROBLEM.md`, write up the problem in full: the title,
-   the `https://leetcode.com/problems/<slug>/` link, the description, the
+   to `problems/<slug>/`, including a per-problem `README.md` template.
+2. In `problems/<slug>/README.md` (the problem's own README, not the repo
+   root or `typescript/` one — GitHub renders it automatically when someone
+   browses into that folder), write up the problem in full: the title, the
+   `https://leetcode.com/problems/<slug>/` link, the description, the
    examples from the problem statement (input/output pairs), and
    constraints if the problem lists any worth noting. Also fill in the
    "Suggested `solve` signature" section (e.g.
@@ -28,9 +30,9 @@ this sequence and stop before implementing anything:
    themselves.
 3. **Never touch `problems/<slug>/solution.ts`** as part of scaffolding —
    not the doc comment, not the signature, not even placeholders. Leave it
-   exactly as the template copied it, for every tool, every time.
-   `PROBLEM.md` is the one place scaffolding writes to now, which sidesteps
-   needing to touch `solution.ts` at all (see "Keeping agents off
+   exactly as the template copied it, for every tool, every time. The
+   problem's `README.md` is the one place scaffolding writes to now, which
+   sidesteps needing to touch `solution.ts` at all (see "Keeping agents off
    `solution.ts` at the tool level" below for why some tools additionally
    hard-block edits there regardless).
 4. In `problems/<slug>/cases.ts`, populate real test cases — the examples
@@ -42,7 +44,7 @@ this sequence and stop before implementing anything:
 6. Run `npm run typecheck` to confirm the stub compiles — expect it to fail
    here if `cases.ts` uses the problem's real argument/return types, since
    `solve` in `solution.ts` still has the template's `(): unknown`
-   signature until the user copies the real one over from `PROBLEM.md`.
+   signature until the user copies the real one over from `README.md`.
    That's expected scaffolding state, not a bug — say so rather than trying
    to work around it. Don't run `npm test` expecting it to pass either — the
    stub throws by design.
