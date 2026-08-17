@@ -6,19 +6,20 @@ async function updateBadge() {
     const rawData = fs.readFileSync('vitest-results.json', 'utf8');
     const results = JSON.parse(rawData);
 
+
+//numTotalTestSuites":28,"numPassedTestSuites":8,"numFailedTestSuites":20,
+
     // 2. Extract Vitest metrics
-    const passed = results.numPassedTests || 0;
-    const failed = results.numFailedTests || 0;
-    const skipped = results.numPendingTests || 0;
-    const total = results.numTotalTests || 0;
+
+    const problemsTotal = numTotalTestSuites / 2;
+    const problemsPassed = numPassedTestSuites / 2;
+    const problemsFailed = numFailedTestSuites / 2;
 
     // 3. Format your badge string structure
-    let message = `${passed}/${total} passed`;
-    if (failed > 0) message += `, ${failed} failed`;
-    if (skipped > 0) message += `, ${skipped} skipped`;
+    let message = `${problemsPassed}/${problemsTotal} passed`;
 
     // 4. Set color indicator based on percent of success
-    const percent = total > 0 ? (passed / total) * 100 : 0;
+    const percent = (problemsPassed / problemsFailed) * 100;
     const color =
       percent === 100 ? 'brightgreen' :
       percent >= 80 ? 'green' :
