@@ -10,21 +10,21 @@ npm install
 
 ## Workflow
 
-Add a new problem (creates `problems/<slug>/` from the template):
+Add a new problem (creates `problems/<problem-name>/` from the template):
 
 ```bash
-npm run new -- valid-parentheses
+npm run new -- <problem-name>
 ```
 
 Then:
 
-1. Implement the problem in `problems/valid-parentheses/solution.ts` — the
+1. Implement the solution in `problems/<problem-name>/solution.ts` — the
    exported function is always called `solve`, whatever its signature. Just
    edit the file and write your answer in `solve`'s body; there's no extra
    step to "add" it beyond saving. See [Solutions aren't
    committed](#solutions-arent-committed) below — this file never reaches
    git, so there's no risk in iterating freely.
-2. Populate test cases in `problems/valid-parentheses/cases.ts`. This is the
+2. Populate test cases in `problems/<problem>/cases.ts`. This is the
    "section for test cases" — every entry is an `{ input, expected }` pair
    (`input` is the argument list passed to `solve`).
 3. Leave `solution.test.ts` alone — it just wires `cases.ts` into Vitest via
@@ -41,7 +41,7 @@ That's intentional: this repo exists to practice solving problems, not to
 publish spoilers of the answers.
 
 If you ever want to commit a specific solution anyway (e.g. to share one),
-it has to be explicit: `git add -f problems/<slug>/solution.ts`. These
+it has to be explicit: `git add -f problems/<problem>/solution.ts`. These
 branches will not be checked into the main branch.
 
 ### Using an agent to add problems
@@ -54,8 +54,8 @@ untouched — not even the doc comment or signature. See
 solutions aren't meant to be committed anyway, having an agent write one
 would just hand you the answer and skip the point of practicing. Once the
 scaffolding is in place, copy the title, link, and suggested `solve`
-signature from `problems/<slug>/README.md` into `solution.ts` yourself,
-solve it, then run `npm test -- <slug>`.
+signature from `problems/<problem>/README.md` into `solution.ts` yourself,
+solve it, then run `npm test -- <problem>`.
 
 ## Running tests
 
@@ -70,12 +70,12 @@ npm run typecheck           # tsc --noEmit, no test execution
 
 ```
 problems/
-  _template/          # copy source for `npm run new`
-  two-sum/             # worked example
-    README.md             # problem write-up — title, link, examples, constraints (renders on GitHub)
-    solution.ts          # your implementation (export `solve`) — gitignored
-    cases.ts               # test case data — edit this most often
-    solution.test.ts         # generic runner, rarely touched
-src/testHarness.ts    # turns cases.ts entries into individual Vitest tests
-scripts/new-problem.mjs  # scaffolds problems/<slug> from _template
+  _template/                     # copy source for `npm run new`
+  two-sum/                       # worked example
+    README.md                    # problem write-up — title, link, examples, constraints (renders on GitHub)
+    solution.ts                  # your implementation (export `solve`) — gitignored
+    cases.ts                     # test case data — edit this most often
+    solution.test.ts             # generic runner, rarely touched
+src/testHarness.ts               # turns cases.ts entries into individual Vitest tests
+scripts/new-problem.mjs          # scaffolds problems/<problem> from _template
 ```
