@@ -1,0 +1,36 @@
+# Palindrome Number
+
+**Link:** https://leetcode.com/problems/palindrome-number/
+
+## Description
+
+Given an integer `x`, return `true` if `x` is a palindrome, and `false`
+otherwise.
+
+## Examples
+
+- Input: `x = 121`
+  Output: `true`
+
+- Input: `x = -121`
+  Output: `false`
+  Explanation: From left to right, it reads `-121`. From right to left, it
+  becomes `121-`. Therefore it is not a palindrome.
+
+- Input: `x = 10`
+  Output: `false`
+  Explanation: Reads `01` from right to left. Therefore it is not a
+  palindrome.
+
+## Constraints
+
+- `-2^31 <= x <= 2^31 - 1`
+
+**Follow up:** Could you solve it without converting the integer to a
+string?
+
+## Suggested `solve` signature
+
+```ts
+function solve(x: number): boolean;
+```
